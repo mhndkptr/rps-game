@@ -31,9 +31,26 @@ for( let i = 0; i < gameParams.length; i++ ) {
         const compPick = getCompPick();
         const playerPick = getPlayerPick(i);
         const result = getResult(compPick, playerPick);
-        resultDisplay.innerHTML = result;
-        compImg.setAttribute('src', 'assets/img/' + compPick + '.png');
-        compImg.setAttribute('alt', compPick);
+
+        const compRandom = ['rock', 'paper', 'scissors'];
+        let r;
+        
+        const randomInterval = setInterval( function() {
+            if( r < compRandom.length - 1 ) {
+                r++;
+            } else {
+                r = 0;
+            }
+            compImg.setAttribute('src', 'assets/img/' + compRandom[r] + '.png');
+            compImg.setAttribute('alt', compRandom[r]);
+        }, 150);
+
+        setTimeout( function() {
+            clearInterval(randomInterval);
+            compImg.setAttribute('src', 'assets/img/' + compPick + '.png');
+            compImg.setAttribute('alt', compPick);
+            resultDisplay.innerHTML = result;
+        }, 1500);
     });
 }
 
